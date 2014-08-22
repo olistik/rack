@@ -101,7 +101,8 @@ module Rack
             filename = get_filename(head)
 
             if filename
-              body = Tempfile.new("RackMultipart")
+              extname = ::File.extname(filename)
+              body = Tempfile.new(["RackMultipart", extname])
               body.binmode  if body.respond_to?(:binmode)
             end
 
